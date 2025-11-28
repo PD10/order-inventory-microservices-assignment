@@ -13,6 +13,10 @@ public class InventoryHandlerFactory {
 
     public InventoryHandler getInventoryHandler(String inventoryHandlerType) {
         // Future: return different handler based on inventoryHandlerType using switch case
-        return defaultInventoryHandler;
+        return switch (inventoryHandlerType.toUpperCase()) {
+            // FEFO is First Expiry First Out
+            case "FEFO" -> defaultInventoryHandler;
+            default -> throw new IllegalArgumentException("Invalid strategy");
+        };
     }
 }

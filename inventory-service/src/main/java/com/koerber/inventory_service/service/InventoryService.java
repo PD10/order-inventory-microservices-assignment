@@ -20,7 +20,8 @@ public class InventoryService {
     }
 
     public void updateInventory(String productId, int qty) {
-        InventoryHandler inventoryHandler = inventoryHandlerFactory.getInventoryHandler("DEFAULT");
+        // FEFO is First Expiry First Out
+        InventoryHandler inventoryHandler = inventoryHandlerFactory.getInventoryHandler("FEFO");
         inventoryHandler.updateInventory(productId, qty);
     }
 }
