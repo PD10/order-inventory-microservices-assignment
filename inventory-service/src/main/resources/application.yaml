@@ -13,5 +13,29 @@ spring:
     properties:
       hibernate.format_sql: true
 
+resilience4j:
+  circuitbreaker:
+    instances:
+      inventoryCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+  retry:
+    instances:
+      inventoryRetry:
+        maxAttempts: 3
+        waitDuration: 1s
+  ratelimiter:
+    instances:
+      orderRateLimiter:
+        limitForPeriod: 10
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+
+security:
+  jwt:
+    secret: very-secret-key-change-in-prod
+    expirationMs: 3600000
+
 server:
   port: 8081
